@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body{
+    background-color:rgb(8, 123, 164);
+     font-family: Arial,sans-serif;
+}
+#container{
+      display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 200px;
+ 
+}
+#weblayout{
+    
+    width: 420px;
+    background-color: rgb(186, 227, 227);
+    padding: 20px;
+    border: 2px solid rgb(187, 58, 12);
+    border-radius: 10px;
+}
+#jokebtn{
+    padding: 10px;
+    margin-left: 160px;
+    text-align: center;
+    background-color: rgb(255, 145, 0);
+}
+#joke{
+   
+    margin-bottom: 50px;
+}
+
+        </style>
+    <title>Dead jokes Web</title>
+</head>
+<body>
+    <div id="container">
+        <div id="weblayout">
+            <h2>🤭 Best Jokes to makes my day! 😂</h2>
+            <p id="joke" class="joke">Aosome Joke Is loading...</p>
+            <button id="jokebtn" class="btn">Next Joke</button>
+        </div>
+    </div>
+    <script>
+        //API KEY:  https://icanhazdadjoke.com/
+        // fetch method is use to fetch api data but it return a promisses (emojies🤭😂😎🏳‍🌈🥛🥵)
+        // and the  promisses always have two states 
+        //(1) fullfill
+        //(2) Rejected
+
+
+        const jokes = document.getElementById("joke");
+        const jokebtn = document.getElementById("jokebtn");
+         
+         const generatejokes = () => {
+            const setHeader = {
+                headers: {
+                Accept : "application/json"
+                }
+            }
+            fetch('https://icanhazdadjoke.com/', setHeader).then((res) => res.json() )
+            .then((Data) => {
+                jokes.innerHTML = Data.joke;
+            }).catch((error) => {
+                console.log(error);
+                
+            })
+          }
+
+     
+       jokebtn.addEventListener('click', generatejokes);
+        generatejokes();
+    </script>
+</body>
+</html>
